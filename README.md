@@ -62,3 +62,95 @@
  "exclude": ["node_modules"] //컴파일을 제외시킬 폴더
 }
 ```
+## eslint
+> eslint install 
+  
+```npm i -D eslint```
+> .eslintrc.json 파일 설정, 설정이 끝나면 필요한 패키지 자동 설치(@typescript-eslint/eslint-plugin, @typescript-eslint/parser)     
+   
+```npx eslint --init```  
+```
+How would you like to use ESLint?
+ To check syntax and find problems
+What type of modules does your project use?
+ JavaScript modules (import/export)
+Which framework does your project use?
+ None of these
+Does your project use TypeScript? (y/N)
+ y
+Where does your code run? (Press space to select, a to toggle all, i to invert selection)
+ Node
+What format do you want your config file to be in? (Use arrow keys)
+ JSON
+The config that you've selected requires the following dependencies:
+ @typescript-eslint/eslint-plugin@latest @typescript-eslint/parser@latest
+Would you like to install them now with npm? (Y/n)
+ Y
+```
+> .eslintrc.json 파일생성된 후 설정 추가
+```
+{
+  ...
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "ignorePatterns": ["dist/", "node_modules/"]
+  ...
+}
+```
+> eslint 적용 확인   
+
+```const a: String = "abc" <- error!```
+
+## prettier
+> prettier install   
+
+```npm i -D prettier```   
+> eslint 와 prettier 충돌되지 않도록 isntall(eslint-config-prettier는 prettier와 충돌되는 eslint 규칙들을 무시하는 설정이고, eslint-plugin-prettier는 Prettier를 사용해 포맷팅을 하도록 ESLint 규칙을 추가하는 플러그인)
+
+```npm i -D eslint-config-prettier eslint-plugin-prettier```
+> .eslintrc.json, .prettierrc.json 설정
+
+```
+.prettierrc.json
+
+{
+  "printWidth": 80,			// 한 줄의 라인 수
+  "tabWidth": 2,			// tab의 너비
+  "useTabs": false,			// tab 사용 여부
+  "semi": true,				// ; 사용 여부
+  "singleQuote": true,			// 'string' 사용 여부
+  "quoteProps": "consistent",		// 객체 property의 따옴표 여부
+  "trailingComma": "es5",		// 끝에 , 사용 여부
+  "bracketSpacing": true,		// Object literal에 띄어쓰기 사용 여부 (ex: { foo: bar })
+  "arrowParens": "always",		// 함수에서 인자에 괄호 사용 여부 (ex: (x) => y)
+  "endOfLine": "lf"			// 라인 엔딩 지정
+}
+```
+
+> eslint에서 prettier를 extends에 사용하기 위해 plugin:prettier/recommended, prettier/@typescript-eslint를 추가  
+```
+.eslintrc.json
+
+{
+  ...
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint"
+  ],
+  ...
+}
+```
+> 완료 후 vscode format on save 
