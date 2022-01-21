@@ -1,7 +1,7 @@
 import express from 'express';
 const app: express.Application = express();
 
-app.get('/', (req: express.Request, res: express.Response) => {
+app.get('/', (res: express.Response) => {
   res.send("hello express !");
 });
 
