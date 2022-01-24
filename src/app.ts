@@ -1,14 +1,19 @@
-import express from 'express';
 import dotenv from 'dotenv';
-dotenv.config({ path: __dirname + `/../.env.${process.env.NODE_ENV}` });
+const environment: string = process.env.NODE_ENV as string;
+dotenv.config({ path: __dirname + `/../.env.${environment}` });
 
+import express from 'express';
 const app: express.Application = express();
+
+import morgan from 'morgan';
+environment === 'development'
+  ? app.use(morgan('dev'))
+  : app.use(morgan('combined'));
 
 app.set('port', 3000 || process.env.PORT);
 
 app.get('/', (req: express.Request, res: express.Response) => {
-  console.log(process.env.TEST);
-  res.send('hello express !');
+  res.send(`hello express !, ${environment}: environment`);
 });
 
 app.listen(app.get('port'), () => {
