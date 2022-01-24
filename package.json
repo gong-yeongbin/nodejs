@@ -4,12 +4,16 @@
   "description": "nodejs practice",
   "main": "index.js",
   "scripts": {
-    "start": "tsc-watch --onSuccess \"ts-node dist/app.js\"",
+    "start:dev": "NODE_ENV=development tsc-watch --onSuccess \"ts-node dist/app.js\"",
+    "start:staging": "NODE_ENV=staging tsc-watch --onSuccess \"ts-node dist/app.js\"",
+    "start:production": "NODE_ENV=production tsc-watch --onSuccess \"ts-node dist/app.js\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/dotenv": "^8.2.0",
+    "dotenv": "^14.2.0",
     "express": "^4.17.2"
   },
   "devDependencies": {
