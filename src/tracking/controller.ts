@@ -1,5 +1,5 @@
 import express from 'express';
-import trackingService from './service';
+import trackingService from '../services/trackingService';
 
 const tracking = (req: express.Request, res: express.Response) => {
   res.send(trackingService.tracking());
