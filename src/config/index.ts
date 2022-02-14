@@ -10,4 +10,5 @@ if (envFound.error) throw new Error();
 export default {
   port: process.env.PORT,
   env: process.env.ENV,
+  mongodb: process.env.MONGO_DB as string,
 };

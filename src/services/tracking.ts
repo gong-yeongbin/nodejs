@@ -1,9 +1,14 @@
 import config from '../config';
 
 export class TrackingService {
-  constructor() {}
+  private readonly userModel;
+
+  constructor({ userModel }) {
+    console.log(userModel);
+    this.userModel = userModel;
+  }
 
   async status() {
-    return `hello world!!, ${config.env}`;
+    return `hello world!!, ${config.env} ${await this.userModel.find()}`;
   }
 }
