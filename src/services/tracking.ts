@@ -1,14 +1,14 @@
 import config from '../config';
+import Test from '../models/Test';
 
-export class TrackingService {
-  private readonly userModel;
+const setTest = async (): Promise<any> => {
+  const test = new Test({ name: 'test' });
 
-  constructor({ userModel }) {
-    console.log(userModel);
-    this.userModel = userModel;
-  }
+  return await test.save();
+};
 
-  async status() {
-    return `hello world!!, ${config.env} ${await this.userModel.find()}`;
-  }
-}
+const getTest = async () => {
+  return `hello world!!, ${config.env} ${await Test.findAllTest()} `;
+};
+
+export { setTest, getTest };
