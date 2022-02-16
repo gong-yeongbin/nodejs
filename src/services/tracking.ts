@@ -1,5 +1,5 @@
-import config from '../config';
-import Test from '../models/Test';
+import config from '@config/index';
+import Test from '@models/Test';
 
 const setTest = async (): Promise<any> => {
   const test = new Test({ name: 'test' });

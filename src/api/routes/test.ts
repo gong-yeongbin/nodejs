@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { getTest, setTest } from '../../services/tracking';
+import { getTest, setTest } from '@services/tracking';
 
 const route: Router = Router();
 
