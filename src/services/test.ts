@@ -1,14 +1,14 @@
 import config from '@config/index';
 import Test from '@models/Test';
 
-const setTest = async (): Promise<any> => {
+const set = async (): Promise<any> => {
   const test = new Test({ name: 'test' });
 
   return await test.save();
 };
 
-const getTest = async () => {
+const get = async () => {
   return `hello world!!, ${config.env} ${await Test.findAllTest()} `;
 };
 
-export { setTest, getTest };
+export { set, get };
