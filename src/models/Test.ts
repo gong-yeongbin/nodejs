@@ -11,13 +11,18 @@ interface ITestMedel extends Model<ITestDocument> {
   findAllTest: () => Promise<ITestDocument>;
 }
 
-const TestSchema: Schema<ITestDocument> = new Schema({
-  name: { type: String, required: true, unique: true },
-  saveDate: {
-    type: Date,
-    default: Date.now,
+const TestSchema: Schema<ITestDocument> = new Schema(
+  {
+    name: { type: String, required: true, unique: true },
+    saveDate: {
+      type: Date,
+      default: Date.now,
+    },
   },
-});
+  {
+    versionKey: false,
+  }
+);
 
 TestSchema.statics.findAllTest = function () {
   return this.find();

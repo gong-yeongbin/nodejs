@@ -5,12 +5,17 @@ interface IAdvertiser {
   regDate: number;
 }
 
-const AdvertiserSchema: Schema = new Schema({
-  name: { type: String, required: true, unique: true },
-  regDate: {
-    type: Number,
-    default: Date.now,
+const AdvertiserSchema: Schema = new Schema(
+  {
+    name: { type: String, required: true, unique: true },
+    regDate: {
+      type: Number,
+      default: Date.now,
+    },
   },
-});
+  {
+    versionKey: false,
+  }
+);
 
 export default mongoose.model<IAdvertiser>('Advertiser', AdvertiserSchema);
