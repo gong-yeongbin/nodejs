@@ -5,25 +5,19 @@ interface ITest {
   saveDate: Date;
 }
 
-interface ITestDocument extends ITest, Document {
-  setTest: (name: string) => Promise<void>;
-}
+interface ITestDocument extends ITest, Document {}
 
 interface ITestMedel extends Model<ITestDocument> {
   findAllTest: () => Promise<ITestDocument>;
 }
 
 const TestSchema: Schema<ITestDocument> = new Schema({
-  name: { type: 'String', required: true, unique: true },
+  name: { type: String, required: true, unique: true },
   saveDate: {
     type: Date,
     default: Date.now,
   },
 });
-
-TestSchema.methods.setTest = async function (name: string) {
-  this.name = name;
-};
 
 TestSchema.statics.findAllTest = function () {
   return this.find();

@@ -4,7 +4,6 @@ import { oneOf, query, Result, validationResult } from 'express-validator';
 const route: Router = Router();
 
 const validateReq = [
-  // param('token').isUUID(4),
   query('clickId').notEmpty(),
   query('pubId').notEmpty(),
   query('subId').optional(),
