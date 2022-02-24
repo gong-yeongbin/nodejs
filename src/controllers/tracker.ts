@@ -5,6 +5,6 @@ export const createTracker = (req: Request, res: Response) => {
   trackerService.createTracker(req, res);
 };
 
-export const getTracker = async (res: Response) => {
+export const getTracker = async (req: Request, res: Response) => {
   res.status(200).json(await trackerService.getTracker());
 };

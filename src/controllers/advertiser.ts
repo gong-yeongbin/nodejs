@@ -5,6 +5,6 @@ export const createAdvertiser = async (req: Request, res: Response) => {
   await advertiserSevice.setAdvertiser(req, res);
 };
 
-export const getAdvertiser = async (res: Response) => {
+export const getAdvertiser = async (req: Request, res: Response) => {
   res.status(200).json(await advertiserSevice.getAdvertiser());
 };

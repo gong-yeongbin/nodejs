@@ -17,5 +17,5 @@ export const createMedia = async (req: Request, res: Response) => {
 };
 
 export const getMedia = async () => {
-  return await Media.find();
+  return Media.find();
 };
