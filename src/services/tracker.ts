@@ -1,4 +1,4 @@
-import Tracker from '@models/Tracker';
+import Tracker from '@src/models/Tracker';
 import { Request, Response } from 'express';
 
 export const createTracker = (req: Request, res: Response) => {

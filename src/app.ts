@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
-import config from '@config/index';
-import loaders from '@loaders/index';
+import config from '@src/config/index';
+import loaders from '@src/loaders/index';
 
 const app: Express = express();
 loaders(app);

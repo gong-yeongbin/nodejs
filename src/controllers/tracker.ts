@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as trackerService from '@services/tracker';
+import * as trackerService from '@src/services/tracker';
 
 export const createTracker = (req: Request, res: Response) => {
   trackerService.createTracker(req, res);

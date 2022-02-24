@@ -1,4 +1,4 @@
-import * as advertiserSevice from '@services/advertiser';
+import * as advertiserSevice from '@src/services/advertiser';
 import { Request, Response } from 'express';
 
 export const createAdvertiser = async (req: Request, res: Response) => {

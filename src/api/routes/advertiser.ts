@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { createAdvertiser, getAdvertiser } from '@controllers/advertiser';
+import { createAdvertiser, getAdvertiser } from '@src/controllers/advertiser';
 
 const route: Router = Router();
 

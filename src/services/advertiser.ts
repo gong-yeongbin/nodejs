@@ -1,4 +1,4 @@
-import Advertiser from '@models/Advertiser';
+import Advertiser from '@src/models/Advertiser';
 import { Request, Response } from 'express';
 
 export const setAdvertiser = async (req: Request, res: Response): Promise<void> => {

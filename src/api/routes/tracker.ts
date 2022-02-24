@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import { getTracker, createTracker } from '../../controllers/tracker';
+import { getTracker, createTracker } from '@src/controllers/tracker';
 
 const route: Router = Router();
 
