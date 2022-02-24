@@ -1,15 +1,15 @@
-import mongoose, { Model, Schema } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 interface IAdvertiser {
   name: string;
-  regDate: number;
+  regDate: Date;
 }
 
-const AdvertiserSchema: Schema = new Schema(
+const advertiserSchema: Schema<IAdvertiser> = new Schema(
   {
     name: { type: String, required: true, unique: true },
     regDate: {
-      type: Number,
+      type: Date,
       default: Date.now,
     },
   },
@@ -18,4 +18,4 @@ const AdvertiserSchema: Schema = new Schema(
   }
 );
 
-export default mongoose.model<IAdvertiser>('Advertiser', AdvertiserSchema);
+export default mongoose.model<IAdvertiser>('Advertiser', advertiserSchema);

@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import test from '@api/routes/test';
 import tracking from '@api/routes/tracking';
 import advertiser from '@api/routes/advertiser';
+import tracker from '@api/routes/tracker';
 
 export default () => {
   const app: Router = Router();
-  test(app);
   advertiser(app);
+  tracker(app);
   tracking(app);
   return app;
 };

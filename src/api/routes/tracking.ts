@@ -24,12 +24,7 @@ const result = (req: Request, res: Response, next: NextFunction) => {
 export default (app: Router) => {
   app.use('/', route);
 
-  route.get(
-    '/:token',
-    validateReq,
-    result,
-    async function (req: Request, res: Response, next: NextFunction) {
-      return res.status(200).json('');
-    }
-  );
+  route.get('/:token', validateReq, result, async function (res: Response) {
+    return res.status(200).json('');
+  });
 };
