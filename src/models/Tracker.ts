@@ -19,9 +19,7 @@ const trackerSchema: Schema<ITracker> = new Schema(
       default: Date.now,
     },
   },
-  {
-    versionKey: false,
-  }
+  { versionKey: false }
 );
 
 export default mongoose.model<ITracker>('Tracker', trackerSchema);

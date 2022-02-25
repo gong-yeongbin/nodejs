@@ -17,9 +17,7 @@ const mediaSchema: Schema<IMedia> = new Schema(
       default: Date.now,
     },
   },
-  {
-    versionKey: false,
-  }
+  { versionKey: false }
 );
 
 export default mongoose.model<IMedia>('Media', mediaSchema);

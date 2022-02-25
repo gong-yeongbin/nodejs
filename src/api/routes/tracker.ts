@@ -1,11 +1,11 @@
-import { NextFunction, Request, Response, Router } from 'express';
-import { getTracker, createTracker } from '@src/controllers/tracker';
+import trackerService from '@src/services/tracker';
+import { Router } from 'express';
 
 const route: Router = Router();
 
 export default (app: Router) => {
   app.use('/tracker', route);
 
-  route.post('/', createTracker);
-  route.get('/', getTracker);
+  route.post('/', trackerService.create);
+  route.get('/', trackerService.get);
 };

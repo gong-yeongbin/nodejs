@@ -13,9 +13,7 @@ const advertiserSchema: Schema<IAdvertiser> = new Schema(
       default: Date.now,
     },
   },
-  {
-    versionKey: false,
-  }
+  { versionKey: false }
 );
 
 export default mongoose.model<IAdvertiser>('Advertiser', advertiserSchema);

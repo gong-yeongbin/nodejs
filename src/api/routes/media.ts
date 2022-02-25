@@ -1,4 +1,4 @@
-import { createMedia, getMedia } from '@src/controllers/media';
+import mediaService from '@src/services/media';
 import { Router } from 'express';
 
 const route: Router = Router();
@@ -6,6 +6,6 @@ const route: Router = Router();
 export default (app: Router) => {
   app.use('/media', route);
 
-  route.post('/', createMedia);
-  route.get('/', getMedia);
+  route.post('/', mediaService.create);
+  route.get('/', mediaService.get);
 };

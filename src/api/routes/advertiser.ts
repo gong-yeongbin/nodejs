@@ -1,11 +1,11 @@
-import { NextFunction, Request, Response, Router } from 'express';
-import { createAdvertiser, getAdvertiser } from '@src/controllers/advertiser';
+import { Router } from 'express';
+import advertiserService from '@src/services/advertiser';
 
 const route: Router = Router();
 
 export default (app: Router) => {
   app.use('/advertiser', route);
 
-  route.post('/', createAdvertiser);
-  route.get('/', getAdvertiser);
+  route.post('/', advertiserService.create);
+  route.get('/', advertiserService.get);
 };

@@ -1,22 +1,25 @@
 import Tracker from '@src/models/Tracker';
 import { Request, Response } from 'express';
 
-export const createTracker = (req: Request, res: Response) => {
-  const trackerinstance = new Tracker();
-  trackerinstance.name = req.body.name;
-  trackerinstance.trackingUrl = req.body.trackingUrl;
-  trackerinstance.installPostbackUrl = req.body.installPostbackUrl;
-  trackerinstance.eventPostbackUrl = req.body.eventPostbackUrl;
+const trackerService = {
+  create: (req: Request, res: Response) => {
+    const trackerinstance = new Tracker();
+    trackerinstance.name = req.body.name;
+    trackerinstance.trackingUrl = req.body.trackingUrl;
+    trackerinstance.installPostbackUrl = req.body.installPostbackUrl;
+    trackerinstance.eventPostbackUrl = req.body.eventPostbackUrl;
 
-  trackerinstance.save((_, result) => {
-    if (result) {
-      res.status(200).send('success');
-    } else {
-      res.status(409).send('duplicate tracker name');
-    }
-  });
+    trackerinstance.save((_, result) => {
+      if (result) {
+        res.status(200).send('success');
+      } else {
+        res.status(409).send('duplicate tracker name');
+      }
+    });
+  },
+  get: async (req: Request, res: Response) => {
+    res.status(200).json(await Tracker.find());
+  },
 };
 
-export const getTracker = async () => {
-  return await Tracker.find();
-};
+export default trackerService;
