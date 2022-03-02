@@ -7,5 +7,5 @@ export default (app: Router) => {
   app.use('/tracker', route);
 
   route.post('/', trackerService.create);
-  route.get('/', trackerService.get);
+  route.get('/', trackerService.getAll);
 };

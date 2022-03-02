@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-interface ITracker {
+export interface ITracker {
   name: string;
   trackingUrl: string;
   installPostbackUrl: string;

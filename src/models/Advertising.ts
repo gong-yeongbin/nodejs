@@ -1,6 +1,6 @@
-import mongoose, { Schema, Types } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-interface IAdvertising {
+export interface IAdvertising {
   name: string;
   platform: string;
   imageUrl: string;

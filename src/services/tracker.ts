@@ -17,7 +17,7 @@ const trackerService = {
       }
     });
   },
-  get: async (req: Request, res: Response) => {
+  getAll: async (req: Request, res: Response) => {
     res.status(200).json(await Tracker.find());
   },
 };

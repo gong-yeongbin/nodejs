@@ -7,5 +7,5 @@ export default (app: Router) => {
   app.use('/advertising', route);
 
   route.post('/', advertisingService.create);
-  route.get('/', advertisingService.get);
+  route.get('/', advertisingService.getAll);
 };

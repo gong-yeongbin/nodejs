@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-interface IMedia {
+export interface IMedia {
   name: string;
   installPostbackUrl: string;
   eventPostbackUrl: string;

@@ -7,5 +7,5 @@ export default (app: Router) => {
   app.use('/media', route);
 
   route.post('/', mediaService.create);
-  route.get('/', mediaService.get);
+  route.get('/', mediaService.getAll);
 };

@@ -1,12 +1,17 @@
-import Advertiser from '@src/models/Advertiser';
+import Advertiser, { IAdvertiser } from '@src/models/Advertiser';
 import Advertising from '@src/models/Advertising';
-import Tracker from '@src/models/Tracker';
+import Tracker, { ITracker } from '@src/models/Tracker';
 import { Request, Response } from 'express';
+import mongoose, { Document } from 'mongoose';
 
 const advertisingService = {
   create: async (req: Request, res: Response) => {
-    const advertiserInstance = await Advertiser.findOne({ _id: req.body.advertiser });
-    const trackerInstance = await Tracker.findOne({ _id: req.body.tracker });
+    const advertiserInstance: Document<IAdvertiser> | null = await Advertiser.findOne({
+      _id: req.body.advertiser,
+    });
+    const trackerInstance: Document<ITracker> | null = await Tracker.findOne({
+      _id: req.body.tracker,
+    });
 
     const advertisingInstance = new Advertising();
     advertisingInstance.name = req.body.name;
@@ -24,7 +29,7 @@ const advertisingService = {
     });
   },
 
-  get: async (req: Request, res: Response) => {
+  getAll: async (req: Request, res: Response) => {
     res.status(200).json(await Advertising.find());
   },
 };

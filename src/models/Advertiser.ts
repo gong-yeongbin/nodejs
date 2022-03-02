@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-interface IAdvertiser {
+export interface IAdvertiser {
   name: string;
   regDate: Date;
 }
