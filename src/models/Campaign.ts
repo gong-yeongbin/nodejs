@@ -13,7 +13,7 @@ export interface ICampaign {
 
 const campaignSchema: Schema<ICampaign> = new Schema(
   {
-    token: { type: String, required: true },
+    token: { type: String, required: true, unique: true },
     name: { type: String, required: true, unique: true },
     type: { type: String, lowercase: true, required: true },
     trackerTrackingUrl: { type: String, required: true },
