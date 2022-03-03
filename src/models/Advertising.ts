@@ -1,16 +1,26 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Model, Schema } from 'mongoose';
 
-export interface IAdvertising {
+interface IAdvertising {
+  id: Schema.Types.ObjectId;
   name: string;
   platform: string;
   imageUrl: string;
   status: boolean;
   advertiser: Schema.Types.ObjectId;
   tracker: Schema.Types.ObjectId;
+  event: {
+    admin: String;
+    tracker: String;
+    media: String;
+  }[];
   regDate: Date;
 }
 
-const advertisingSchema: Schema<IAdvertising> = new Schema(
+interface IAdvertisingModel extends Model<IAdvertising> {
+  findByAdvertisingId: (id: string) => Promise<IAdvertising>;
+}
+
+const advertisingSchema: Schema = new Schema(
   {
     name: { type: String, required: true, unique: true },
     platform: { type: String, lowercase: true, required: true },
@@ -18,9 +28,14 @@ const advertisingSchema: Schema<IAdvertising> = new Schema(
     status: { type: Boolean, default: true },
     advertiser: { type: Schema.Types.ObjectId, ref: 'Advertiser', required: true },
     tracker: { type: Schema.Types.ObjectId, ref: 'Tracker', required: true },
+    event: [{ admin: String, tracker: String, media: String, _id: false }],
     regDate: { type: Date, default: Date.now },
   },
   { versionKey: false }
 );
 
-export default mongoose.model<IAdvertising>('Advertising', advertisingSchema);
+advertisingSchema.statics.findByAdvertisingId = function (id: string) {
+  return this.findById({ _id: id });
+};
+
+export default mongoose.model<IAdvertising, IAdvertisingModel>('Advertising', advertisingSchema);

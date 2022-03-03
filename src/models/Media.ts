@@ -1,10 +1,15 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Model, Schema, Types } from 'mongoose';
 
-export interface IMedia {
+interface IMedia {
+  id: Schema.Types.ObjectId;
   name: string;
   installPostbackUrl: string;
   eventPostbackUrl: string;
   regDate: Date;
+}
+
+interface IMediaModel extends Model<IMedia> {
+  findByMediaId: (id: string) => Promise<IMedia>;
 }
 
 const mediaSchema: Schema<IMedia> = new Schema(
@@ -20,4 +25,8 @@ const mediaSchema: Schema<IMedia> = new Schema(
   { versionKey: false }
 );
 
-export default mongoose.model<IMedia>('Media', mediaSchema);
+mediaSchema.statics.findByMediaId = function (id: string) {
+  return this.findById({ _id: id });
+};
+
+export default mongoose.model<IMedia, IMediaModel>('Media', mediaSchema);

@@ -1,26 +1,22 @@
-import Advertising, { IAdvertising } from '@src/models/Advertising';
+import Advertising from '@src/models/Advertising';
 import Campaign from '@src/models/Campaign';
-import Media, { IMedia } from '@src/models/Media';
+import Media from '@src/models/Media';
 import { Request, Response } from 'express';
-import { Document } from 'mongoose';
 import crypto from 'crypto';
 
 const campaginService = {
   create: async (req: Request, res: Response) => {
-    const advertisingInstance: Document<IAdvertising> | null = await Advertising.findOne({
-      _id: req.body.advertising,
-    });
-    const mediaInstance: Document<IMedia> | null = await Media.findOne({
-      _id: req.body.media,
-    });
+    const advertisingInstance = await Advertising.findByAdvertisingId(req.body.advertising);
+    const mediaInstance = await Media.findByMediaId(req.body.media);
 
     const campaignInstance = new Campaign();
     campaignInstance.token = crypto.randomBytes(10).toString('base64');
     campaignInstance.name = req.body.name;
     campaignInstance.type = req.body.type;
     campaignInstance.trackerTrackingUrl = req.body.trackerTrackingUrl;
-    campaignInstance.advertising = advertisingInstance?.id;
-    campaignInstance.media = mediaInstance?.id;
+    campaignInstance.advertising = advertisingInstance.id;
+    campaignInstance.event = advertisingInstance.event;
+    campaignInstance.media = mediaInstance.id;
 
     campaignInstance.save((error, result) => {
       if (result) {

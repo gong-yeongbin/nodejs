@@ -1,17 +1,28 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Model, Schema } from 'mongoose';
 
-export interface ICampaign {
+interface ICampaign extends Document {
+  id: Schema.Types.ObjectId;
   token: string;
   name: string;
   type: string;
   trackerTrackingUrl: string;
   advertising: Schema.Types.ObjectId;
   media: Schema.Types.ObjectId;
+  event: {
+    admin: String;
+    tracker: String;
+    media: String;
+    status?: boolean;
+  }[];
   status: boolean;
   regDate: Date;
 }
 
-const campaignSchema: Schema<ICampaign> = new Schema(
+interface ICampaignModel extends Model<ICampaign> {
+  findByCampaignId: (id: string) => Promise<ICampaign>;
+}
+
+const campaignSchema: Schema = new Schema(
   {
     token: { type: String, required: true, unique: true },
     name: { type: String, required: true, unique: true },
@@ -19,6 +30,15 @@ const campaignSchema: Schema<ICampaign> = new Schema(
     trackerTrackingUrl: { type: String, required: true },
     advertising: { type: Schema.Types.ObjectId, ref: 'Advertising', required: true },
     media: { type: Schema.Types.ObjectId, ref: 'Media', required: true },
+    event: [
+      {
+        admin: String,
+        tracker: String,
+        media: String,
+        status: { type: Boolean, default: true },
+        _id: false,
+      },
+    ],
     status: { type: Boolean, default: true },
     regDate: { type: Date, default: Date.now },
   },
@@ -27,4 +47,8 @@ const campaignSchema: Schema<ICampaign> = new Schema(
   }
 );
 
-export default mongoose.model<ICampaign>('Campaign', campaignSchema);
+campaignSchema.statics.findByCampaignId = function (id: string) {
+  return this.findById({ _id: id });
+};
+
+export default mongoose.model<ICampaign, ICampaignModel>('Campaign', campaignSchema);

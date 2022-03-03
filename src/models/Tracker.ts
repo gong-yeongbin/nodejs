@@ -1,11 +1,16 @@
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { Model, Schema } from 'mongoose';
 
-export interface ITracker {
+interface ITracker {
+  id: Schema.Types.ObjectId;
   name: string;
   trackingUrl: string;
   installPostbackUrl: string;
   eventPostbackUrl: string;
   regDate: Date;
+}
+
+interface ITrackerModel extends Model<ITracker> {
+  findByTrackerId: (id: string) => Promise<ITracker>;
 }
 
 const trackerSchema: Schema<ITracker> = new Schema(
@@ -22,4 +27,8 @@ const trackerSchema: Schema<ITracker> = new Schema(
   { versionKey: false }
 );
 
-export default mongoose.model<ITracker>('Tracker', trackerSchema);
+trackerSchema.statics.findByTrackerId = function (id: string) {
+  return this.findById({ _id: id });
+};
+
+export default mongoose.model<ITracker, ITrackerModel>('Tracker', trackerSchema);
