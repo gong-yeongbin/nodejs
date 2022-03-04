@@ -2,7 +2,6 @@ import Advertising from '@src/models/Advertising';
 import Campaign from '@src/models/Campaign';
 import Media from '@src/models/Media';
 import { Request, Response } from 'express';
-import crypto from 'crypto';
 
 const campaginService = {
   create: async (req: Request, res: Response) => {
@@ -10,7 +9,6 @@ const campaginService = {
     const mediaInstance = await Media.findByMediaId(req.body.media);
 
     const campaignInstance = new Campaign();
-    campaignInstance.token = crypto.randomBytes(10).toString('base64');
     campaignInstance.name = req.body.name;
     campaignInstance.type = req.body.type;
     campaignInstance.trackerTrackingUrl = req.body.trackerTrackingUrl;

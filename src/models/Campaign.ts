@@ -2,7 +2,6 @@ import mongoose, { Model, Schema } from 'mongoose';
 
 interface ICampaign extends Document {
   id: Schema.Types.ObjectId;
-  token: string;
   name: string;
   type: string;
   trackerTrackingUrl: string;
@@ -24,7 +23,6 @@ interface ICampaignModel extends Model<ICampaign> {
 
 const campaignSchema: Schema = new Schema(
   {
-    token: { type: String, required: true, unique: true },
     name: { type: String, required: true, unique: true },
     type: { type: String, lowercase: true, required: true },
     trackerTrackingUrl: { type: String, required: true },
